@@ -20,49 +20,55 @@ GoBlog adalah project Laravel sederhana untuk membuat dan mengelola postingan bl
 
 ## Cara Instalasi
 
-### Clone Repository
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/username/goblog.git
 cd goblog
 ```
 
-### Install Dependency
+### 2. Install Dependency
 
 ```bash
 composer install
 npm install
 ```
 
-### Salin File .env
+### 3. Salin File .env
 
 ```bash
 cp .env.example .env
 ```
 
-### Generate App Key
+### 4. Generate App Key
 
 ```bash
 php artisan key:generate
 ```
 
-### Setup Database
+### 5. Setup Database
 
+buka file .env lalu cocokkan seperti ini
+
+```
 DB_DATABASE=goblog
 DB_USERNAME=root
 DB_PASSWORD=
-
-### Buat Database di MySQL
-
-create database goblog
-
-### Run Migrate
-
-```bash
-php artisan migrate --seed
 ```
 
-### Run The Application
+lalu buat databse di MySQL menggunakan query berikut
+
+```
+create database goblog
+```
+
+### 7. Run Migrate
+
+```bash
+php artisan migrate
+```
+
+### 8. Run The Application
 
 run build frontend
 
