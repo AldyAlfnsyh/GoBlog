@@ -1,3 +1,4 @@
+![Screenshot (97)](https://github.com/user-attachments/assets/db2d44c0-e75a-480c-a037-6970991cdb45)
 # GoBlog
 
 GoBlog adalah project Laravel sederhana untuk membuat dan mengelola postingan blog.
@@ -14,7 +15,7 @@ GoBlog adalah project Laravel sederhana untuk membuat dan mengelola postingan bl
 ## Dibuat dengan
 
 -   Laravel 11
--   Tailwind CSS
+-   Tailwind CSS (dengan bantuan flowbite dan Meraki UI)
 -   Filament
 -   MySQL
 
@@ -86,9 +87,16 @@ lalu copy [htttp://127.0.0.1:8000] ke browser
 
 ### 9. Akun Admin (Akses Panel Admin)
 
+
 ```bash
 php artisan db:seed --class=AdminSeeder
 ```
+masuk ke halaman login,
+![Screenshot (80)](https://github.com/user-attachments/assets/3dd6a799-8d6a-4802-b6de-c9fd1752c28e)
+lalu masukkan sebagai berikut
 
-email: admin@gmail.com
+email: admin@gmail.com  
 password: admin1234
+
+Maka Tampilan dashboard akan seperti ini
+![Screenshot (57)](https://github.com/user-attachments/assets/52eb569a-bfe9-4324-b99b-49a020923cf8)
