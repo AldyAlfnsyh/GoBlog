@@ -84,7 +84,7 @@ php artisan serve
 
 lalu copy [htttp://127.0.0.1:8000] ke browser
 
-### Akun Admin (Akses Panel Admin)
+### 9. Akun Admin (Akses Panel Admin)
 
 ```bash
 php artisan db:seed --class=AdminSeeder
