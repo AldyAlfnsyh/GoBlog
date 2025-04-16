@@ -1,0 +1,131 @@
+<?php
+
+namespace App\Filament\Clusters\Reports\Resources;
+
+use App\Filament\Clusters\Reports;
+use App\Filament\Clusters\Reports\Resources\ReportReplyResource\Pages;
+use App\Filament\Clusters\Reports\Resources\ReportReplyResource\RelationManagers;
+use App\Models\Report;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Infolists\Components\Grid;
+use Filament\Infolists\Components\Group;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class ReportReplyResource extends Resource
+{
+    protected static ?string $model = Report::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-arrow-uturn-left';
+
+    protected static ?string $cluster = Reports::class;
+
+    protected static ?string $label = 'Reply';
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                //
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->query(
+                static::getEloquentQuery()->whereHas('reply', function ($query) {
+                    $query->whereNotNull('content');
+                })
+            )
+            ->columns([
+                TextColumn::make('reply.content')->label('Content')->limit(50),
+                TextColumn::make('type.name'),
+                TextColumn::make('message'),
+                TextColumn::make('reply.comment.content')->limit(10)->label('On Comment'),
+                TextColumn::make('user.name')
+                ->description(fn ($record) : string => $record->user['email'])
+                ->searchable()->label('Sender'),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                
+                Grid::make(2)
+                ->schema([
+                    Group::make([
+                        TextEntry::make('user.name')->label('Sender'),                                    
+                        TextEntry::make('message'),                                                                
+                    ]),
+                    Group::make([
+                        TextEntry::make('type.name'),                                    
+                        TextEntry::make('created_at')
+                        ->label('Created at')
+                        ->badge()
+                        ->date()
+                        ->color('success'),
+                    ])
+                ]),
+                
+                Section::make('Reply Reported')
+                ->schema([
+                    
+                    TextEntry::make('reply.user.name')->label('Created by'),                                    
+                    TextEntry::make('updated_at')
+                    ->badge()
+                    ->date()
+                    ->color('success')
+                    ->label('Updated at'),
+                    TextEntry::make('reply.comment.content')->label('on comment'),
+                    TextEntry::make('reply.content')->label('Content')
+                        ->prose()
+                        ->markdown()
+                ])
+                ->collapsible(),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListReportReplies::route('/'),
+            'create' => Pages\CreateReportReply::route('/create'),
+            'edit' => Pages\EditReportReply::route('/{record}/edit'),
+            'view' => Pages\ViewReportReply::route('/{record}'),
+        ];
+    }
+}
