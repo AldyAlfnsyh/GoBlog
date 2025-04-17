@@ -24,7 +24,7 @@ GoBlog adalah project Laravel sederhana untuk membuat dan mengelola postingan bl
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/username/goblog.git
+git clone https://github.com/AldyAlfnsyh/GoBlog.git
 cd goblog
 ```
 
