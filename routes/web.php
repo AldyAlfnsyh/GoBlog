@@ -43,7 +43,8 @@ Route::post('/create-article/{post:slug}',[PostController::class, "update"])->mi
 
 Route::post('/dashboard',[PostController::class, "delete"])->middleware('auth');
 Route::get('/dashboard', function () {
-    if (Gate::allows('access_dashboard_user')) {
+    $user = User::where("id", Auth::id())->first();
+    if (Gate::allows('access_dashboard_admin')) {
         return redirect()->route('filament.admin.pages.dashboard');
     }
     $myposts = Post::latest();
