@@ -51,8 +51,8 @@ class AppServiceProvider extends ServiceProvider
             return $post->author_id === $user->id;
         });
 
-        Gate::define('access_dashboard_user', function(User $user){
-            return $user->is_admin === false;
-        });
+        Gate::define('access_dashboard_admin', function (User $user) {
+        return $user->is_admin == 'true'; 
+    });
     }
 }
