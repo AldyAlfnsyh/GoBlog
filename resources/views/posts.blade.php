@@ -8,7 +8,7 @@
                 <div class="mx-auto max-w-screen-md sm:text-center">
                     
                     <form action="/posts" method='GET'>
-                        <div class="items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0">
+                        <div class="items-center mx-auto mb-3 space-y-4 space-x-3 max-w-screen-sm sm:flex sm:space-y-0">
                             <div class="relative w-full">
                             
                                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -50,7 +50,9 @@
                         </div>
                         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">
                             <a href="/posts/{{$post['slug']}}">{{ $post['title']}}</a></h2>
-                        <p class="mb-5 font-light text-gray-500 ">{{ Str::limit(strip_tags($post['body']),150)}}</p>
+                        {{-- <p class="mb-5 font-light text-gray-500 ">{{ Str::limit(strip_tags($post['body']),150)}}</p> --}}
+                        <p class="mb-5 font-light text-gray-500 ">{{ Str::limit(preg_replace('/\xC2\xA0/', ' ', html_entity_decode(strip_tags($post['body']))), 150) }}</p>
+
                         <div class="rounded-full border-2 border-gray-400 w-max p-1 mb-5 font-light text-gray-500 flex col ">
                             <svg  class="w-6 h-6 text-gray-500"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

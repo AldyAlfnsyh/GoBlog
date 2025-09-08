@@ -18,6 +18,7 @@
         "vite": "^6.1.1"
     },
     "dependencies": {
+        "@tailwindcss/typography": "^0.5.16",
         "quill": "^2.0.3"
     }
 }

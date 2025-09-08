@@ -166,3 +166,51 @@ trix-editor {
 .border-primary-950 {
     border-color: var(--primary-950);
 }
+
+/* Fix Trix with Tailwind Preflight */
+trix-toolbar button {
+    background: none !important;
+    border: none !important;
+    padding: 4px;
+    cursor: pointer;
+}
+
+trix-editor h1,
+.prose h1 {
+    @apply text-2xl font-bold text-gray-800;
+}
+
+trix-editor blockquote,
+.prose blockquote {
+    @apply border-l-4 border-gray-400 pl-4 italic text-gray-700 bg-gray-50;
+}
+
+trix-editor ul,
+.prose ul {
+    list-style: disc !important;
+    padding-left: 1.25rem; /* biar ada indent */
+}
+
+trix-editor ol,
+.prose ol {
+    list-style: decimal !important;
+    padding-left: 1.25rem;
+}
+
+trix-editor a {
+    color: #1e64e6;
+    text-decoration: underline;
+}
+.prose a {
+    color: #1e64e6;
+    text-decoration: underline;
+}
+.prose a:hover {
+    color: #5d95ff;
+    text-decoration: underline;
+}
+.prose pre,
+trix-editor pre {
+    background: #000;
+    color: white;
+}

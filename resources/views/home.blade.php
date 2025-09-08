@@ -58,7 +58,7 @@
                         </h1>
     
                         <p class="mt-2 text-gray-500 ">
-                            {{Str::limit(strip_tags($post['body']),150)}}
+                            {{ Str::limit(preg_replace('/\xC2\xA0/', ' ', html_entity_decode(strip_tags($post['body']))), 150) }}
                         </p>
     
                         <div class="flex items-center justify-between mt-4">

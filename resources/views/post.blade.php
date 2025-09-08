@@ -17,7 +17,7 @@
                     <p class="text-base text-gray-500 "><time pubdate datetime="2022-02-08" title="February 8th, 2022">{{ $post['created_at']->format('j F Y')}}</time></p>
                     <form action="{{ route('postLikeOrDislike', $post->id) }}" method="POST" class=" flex col">
                         @csrf
-                        <ul class="items-center w-full text-sm font-medium text-gray-900 bg-gray-200 border border-gray-200 rounded-full sm:flex shadow-md ">
+                        <ul class="items-center w-full text-sm font-medium text-gray-900 bg-gray-200 border border-gray-200 rounded-full flex shadow-md ">
                         <li class="w-full ">
                             <div class="flex items-center ps-3">
                                 <button type="submit" name="type" value="like" class=" flex col">
@@ -99,7 +99,7 @@
     <br>
     <br>
             
-    <article class="prose">{!! $post['body'] !!}</article>
+    <div class="prose max-w-none">{!! $post['body'] !!}</div>
     <section class="not-format">
         <div class="flex justify-between items-center my-6 ">
             <h2 class="text-lg lg:text-2xl font-bold text-gray-900 ">Discussion ({{$count_discussion}})</h2>
