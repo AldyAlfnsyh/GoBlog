@@ -19,6 +19,7 @@ GoBlog adalah project Laravel sederhana untuk membuat dan mengelola postingan bl
 -   Tailwind CSS (dengan bantuan flowbite dan Meraki UI)
 -   Filament
 -   MySQL
+-   Trix Editor
 
 ## Cara Instalasi
 
