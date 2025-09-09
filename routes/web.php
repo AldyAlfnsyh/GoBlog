@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 
+Route::post('/trix-attachments', [AttachmentController::class, 'store'])->name('trix-attachments.store');
 
 Route::get('/profile', [ProfileController::class, "index"])->middleware('auth');
 Route::post('/profile', [ProfileController::class, "update"])->middleware('auth');

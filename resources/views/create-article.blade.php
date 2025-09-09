@@ -63,14 +63,14 @@ document.addEventListener("trix-attachment-add", function(event) {
 });
 
 function uploadFile(attachment) {
-    const formData = new FormData();
+    var formData = new FormData();
     formData.append("file", attachment.file);
 
-    fetch("/upload", {
+    fetch("/trix-attachments", {
         method: "POST",
         body: formData,
         headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute("content")
         }
     }).then(res => res.json())
       .then(data => {

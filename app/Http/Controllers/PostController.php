@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AttachmentHelper;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -46,12 +47,14 @@ class PostController extends Controller
         $post = Post::find($request->id);
         $this->authorize('access_post', $post);  
 
+        // Cleanup attachment lama yang tidak dipakai
+        AttachmentHelper::deleteUnusedAttachments($post->body, $request->body);
+
         if ($request->hasFile('image')) {
             if($post->image){
                 Storage::disk('public')->delete($post->image);
             }
             $path = $request->file('image')->store('post','public');
-            // dd($path);
             $post->image = $path;
         }
         $post->title = $request->name;
@@ -73,6 +76,9 @@ class PostController extends Controller
     public function delete(Request $request){
 
         $post = Post::find($request->id);
+
+        // Hapus semua attachment dari body
+        AttachmentHelper::deleteAllAttachments($post->body);
 
         $post->delete();
 
