@@ -80,6 +80,10 @@ class PostController extends Controller
         // Hapus semua attachment dari body
         AttachmentHelper::deleteAllAttachments($post->body);
 
+        if($post->image){
+            Storage::disk('public')->delete($post->image);
+        }
+
         $post->delete();
 
         return back();
